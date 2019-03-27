@@ -6,7 +6,7 @@ import random
 
 @default_reply()
 def error_func(message):
-    message.reply("…？\n何か御用でしょうか？")
+    message.reply("…？\nHerokuから呼ばれましたが何か御用でしょうか？")
 
 @respond_to("おみくじ")
 def lottery(message):

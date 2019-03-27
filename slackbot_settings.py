@@ -10,7 +10,7 @@ load_dotenv(env_path)
 API_TOKEN = os.environ.get("API_TOKEN")
 
 # このBotが行う処理が見つからなかった時に返すメッセージ
-DEFAULT_REPLY = "応答に失敗しました"
+DEFAULT_REPLY = "Heroku版：応答に失敗しました。"
 
 # プラグインスクリプトを置いてあるサブディレクトリ名
 PLUGINS = ['plugins']
