@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 env_path = join(dirname(__file__), '.env')
 load_dotenv(env_path)
 
-
 # .envからbotアカウントのトークンを取得
 API_TOKEN = os.environ.get("API_TOKEN")
 
