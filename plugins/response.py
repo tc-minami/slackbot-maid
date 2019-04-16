@@ -2,60 +2,23 @@ from slackbot.bot import respond_to
 from slackbot.bot import default_reply
 from slackbot.bot import listen_to
 import random
-import sqlite3
 
 from slacker import Slacker
 import slackbot_settings
 
-class DB:
-    def __init__(self):
-        self.DB_NAME = "main.db"
-        self.TABLE_NAME = "default_table"
-        # self.isDBConnected = False
-        self.connect()
-        self.createTableIfNotExist()
-
-    def __del__(self):
-        self.disconnect()
-
-    def connect(self):
-        # DBに接続する
-        self.conn = sqlite3.connect(self.DB_NAME)
-        self.cursor = self.conn.cursor()
-
-    def disconnect(self):
-        if(self.conn is not None):
-            self.conn.close()
-
-    def createTableIfNotExist(self):
-        sql = "CREATE TABLE IF NOT EXISTS "
-        sql += " " + self.TABLE_NAME + " "
-        sql += ''' (id INTEGER PRIMARY KEY,
-                    key TEXT,
-                    value TEXT,
-                    time TEXT)
-                    '''
-        self.conn.execute(sql)
-        self.conn.commit()
-
-    def createDateTimeStr(self, year, month, day, hour, min, sec):
-        return str(year) + str(month) + str(day)\
-        + str(hour) + str(min) + str(sec)
-
-    def isDBConnected(self):
-        return self.conn is not None and self.cursor is not None
+from .db import DB
 
 
-db = DB()
+# db = DB()
 slacker = Slacker(slackbot_settings.API_TOKEN)
 
 @default_reply()
 def defaultReply(message):
     message.reply("何か御用でしょうか？")
-    if db.isDBConnected():
-        message.reply("DBは接続済みですよ。")
-    else:
-        message.reply("DBはまだ接続されてませんよ。")
+    # if db.isDBConnected():
+    #     message.reply("DBは接続済みですよ。")
+    # else:
+    #     message.reply("DBはまだ接続されてませんよ。")
 
 # https://blog.bitmeister.jp/?p=3948
 # https://qiita.com/do_m_gatoru/items/d6dbb5e5dbca8d96a1cd
